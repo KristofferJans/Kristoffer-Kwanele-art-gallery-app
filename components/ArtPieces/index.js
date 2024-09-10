@@ -5,7 +5,7 @@ export default function ArtPieces({ pieces }) {
   return (
     <ul>
       {pieces.map((piece) => (
-        <li key={pieces.slug}>
+        <li key={piece.slug}>
           <div>
             <h2>{piece.name}</h2>
             <Image
