@@ -1,3 +1,8 @@
-export default function ArtPieceDetails({ image, title, artist, year, genre }) {
-  return <h1>This is the ArtPieceDetailsPage</h1>;
+export default function ArtPieceDetails({ data }) {
+  return (
+    <>
+      <h1>Hello</h1>
+      <p>{data.genre}</p>
+    </>
+  );
 }
