@@ -1,6 +1,7 @@
 import Layout from "@/components/Layout";
 import GlobalStyle from "../styles";
 import useSWR from "swr";
+import { useState } from "react";
 
 const URL = "https://example-apis.vercel.app/api/art";
 
@@ -21,11 +22,11 @@ export default function App({ Component, pageProps }) {
     return response.json();
   };
   const { data, mutate, error, isLoading } = useSWR(URL, fetcher);
+
   if (!data) return;
   if (error) return <div>failed to load</div>;
   if (isLoading) return <div>loading...</div>;
 
-  // console.log("data", data);
   return (
     <>
       <GlobalStyle />
@@ -34,3 +35,52 @@ export default function App({ Component, pageProps }) {
     </>
   );
 }
+
+/*
+***
+USE STATE APROACH 
+***
+
+const [artPiecesInfo, setArtPiecesInfo] = useState([]);
+
+function handleToggleFavorite(slug) {
+  setArtPiecesInfo((artPiecesInfo) => {
+    // find the favorite art piece in the state
+    const favs = artPiecesInfo.find((favs) => favs.slug === slug);
+
+    // if the favorite art piece is already in the state, toggle the isFavorite property
+    if (favs) {
+      return artPiecesInfo.map((favs) => 
+        favs.slug === slug ? {...favs, isFavorite: !favs.isFavorite} : favs
+      );
+    }
+    // if the favorite art piece is not in the state, add it with isFavorite set to true
+    return [...artPiecesInfo, {slug, isFavorite: true}];
+  });
+}
+
+const { isFavorite } = artPiecesInfo.find((favs) => favs.slug === slug) ?? {
+  isFavorite: false,
+};
+
+***
+USE IMMER APROACH 
+***
+
+const [artPiecesInfo, updateArtPiecesInfo] = useImmer([]);
+
+function handleToggleFavorite(slug) {
+  updateartPiecesInfo((draft) => {
+    // find the art piece in the state
+    const info = draft.find((info) => info.slug === slug);
+
+    // if the movie is already in the state, toggle the isFavorite property
+    if (info) {
+      info.isFavorite = !info.isFavorite;
+    } else {
+      // if the movie is not in the state, add it with isFavorite set to true
+      draft.push({ slug, isFavorite: true });
+    }
+  });
+}
+*/
