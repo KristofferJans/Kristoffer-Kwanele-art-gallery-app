@@ -10,7 +10,12 @@ export default function ArtPieceDetails({ image, title, artist, year, genre }) {
       <p>Year: {year}</p>
       <p>Genre: {genre}</p>
       <Image src={image} alt={title} height={144} width={144} />
-      <button onClick={() => router.push("/art-pieces")}>Go back</button>
+      <button
+        class="button_detailspage"
+        onClick={() => router.push("/art-pieces")}
+      >
+        Go back
+      </button>
     </>
   );
 }
