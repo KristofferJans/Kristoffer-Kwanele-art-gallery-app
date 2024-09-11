@@ -2,6 +2,7 @@ import Layout from "@/components/Layout";
 import GlobalStyle from "../styles";
 import useSWR from "swr";
 import { useState } from "react";
+import { useImmer } from "use-immer";
 
 const URL = "https://example-apis.vercel.app/api/art";
 
@@ -23,7 +24,32 @@ export default function App({ Component, pageProps }) {
   };
   const { data, mutate, error, isLoading } = useSWR(URL, fetcher);
 
-  if (!data) return;
+  // Initialize the state with useImmer
+  const [artPiecesInfo, updateArtPiecesInfo] = useImmer([]);
+
+  function handleToggleFavorite(slug) {
+    updateArtPiecesInfo((draft) => {
+      // find the art piece in the state
+      const info = draft.find((info) => info.slug === slug);
+
+      // if the movie is already in the state, toggle the isFavorite property
+      if (info) {
+        info.isFavorite = !info.isFavorite;
+      } else {
+        // if the movie is not in the state, add it with isFavorite set to true
+        draft.push({ slug, isFavorite: true });
+      }
+    });
+    console.log("Updated artPiecesInfo:", artPiecesInfo);
+  }
+
+  // Log the props passed to the page component
+  console.log("Props passed to page component:", {
+    artPiecesInfo,
+    handleToggleFavorite,
+  });
+
+  if (!data) return <div>Loading data...</div>;
   if (error) return <div>failed to load</div>;
   if (isLoading) return <div>loading...</div>;
 
@@ -31,7 +57,12 @@ export default function App({ Component, pageProps }) {
     <>
       <GlobalStyle />
       <Layout />
-      <Component {...pageProps} data={data} />
+      <Component
+        {...pageProps}
+        data={data}
+        artPiecesInfo={artPiecesInfo}
+        handleToggleFavorite={handleToggleFavorite}
+      />
     </>
   );
 }
@@ -67,6 +98,7 @@ const { isFavorite } = artPiecesInfo.find((favs) => favs.slug === slug) ?? {
 USE IMMER APROACH 
 ***
 
+// Initialize the state with useImmer
 const [artPiecesInfo, updateArtPiecesInfo] = useImmer([]);
 
 function handleToggleFavorite(slug) {

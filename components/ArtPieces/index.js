@@ -1,26 +1,41 @@
 import Image from "next/image";
 import List from "../List";
 import Link from "next/link";
+import FavoriteButton from "../FavoriteButton";
 
-export default function ArtPieces({ pieces }) {
+export default function ArtPieces({
+  pieces,
+  artPiecesInfo,
+  handleToggleFavorite,
+}) {
   return (
     <ul>
-      {pieces.map((piece) => (
-        <li key={piece.slug}>
-          <Link legacyBehavior href={`/art-pieces/${piece.slug}`}>
-            <a style={{ textDecoration: "none", color: "inherit" }}>
-              <h2>{piece.name}</h2>
-              <Image
-                src={piece.imageSource}
-                alt={piece.name}
-                height={144}
-                width={144}
-              />
-              <p>Artist: {piece.artist}</p>
-            </a>
-          </Link>
-        </li>
-      ))}
+      {pieces.map((piece) => {
+        // Prüfe für jedes Kunstwerk, ob es ein Favorit ist
+        const isFavorite = artPiecesInfo?.find(
+          (info) => info.slug === piece.slug
+        )?.isFavorite;
+        return (
+          <li key={piece.slug}>
+            <Link legacyBehavior href={`/art-pieces/${piece.slug}`}>
+              <a style={{ textDecoration: "none", color: "inherit" }}>
+                <h2>{piece.name}</h2>
+                <Image
+                  src={piece.imageSource}
+                  alt={piece.name}
+                  height={144}
+                  width={144}
+                />
+                <p>Artist: {piece.artist}</p>
+              </a>
+            </Link>
+            <FavoriteButton
+              isFavorite={isFavorite}
+              onToggleFavorite={() => handleToggleFavorite(piece.slug)}
+            />
+          </li>
+        );
+      })}
     </ul>
   );
 }

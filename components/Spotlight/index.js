@@ -1,7 +1,12 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import FavoriteButton from "../FavoriteButton";
 
-export default function Spotlight({ pieces }) {
+export default function Spotlight({
+  pieces,
+  artPiecesInfo,
+  handleToggleFavorite,
+}) {
   const [randomArtPiece, setRandomArtPiece] = useState();
 
   function getRandomNumber() {
@@ -12,16 +17,31 @@ export default function Spotlight({ pieces }) {
     setRandomArtPiece(getRandomNumber());
   }, [pieces]);
 
+  // Log the props to check if they are being received correctly
+  useEffect(() => {
+    console.log("Spotlight Props:", { artPiecesInfo, handleToggleFavorite });
+  }, [artPiecesInfo, handleToggleFavorite]);
+
   if (!randomArtPiece) return;
+
+  const isFavorite = artPiecesInfo?.find(
+    (info) => info.slug === randomArtPiece.slug
+  )?.isFavorite;
 
   console.log("randomArtPiece", randomArtPiece);
 
   return (
-    <Image
-      src={randomArtPiece.imageSource}
-      alt={randomArtPiece.name}
-      height={144}
-      width={144}
-    />
+    <>
+      <Image
+        src={randomArtPiece.imageSource}
+        alt={randomArtPiece.name}
+        height={144}
+        width={144}
+      />
+      <FavoriteButton
+        isFavorite={isFavorite}
+        onToggleFavorite={() => handleToggleFavorite(randomArtPiece.slug)}
+      />
+    </>
   );
 }

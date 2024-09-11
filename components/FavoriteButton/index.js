@@ -13,10 +13,10 @@ const Svg = styled(SvgComponent)`
   }
 `;
 
-export default function FavoriteButton() {
+export default function FavoriteButton({ isFavorite, onToggleFavorite }) {
   return (
-    <button type="button">
-      <Svg isFavorite={false} />
+    <button type="button" onClick={onToggleFavorite}>
+      <Svg isFavorite={isFavorite} />
     </button>
   );
 }
