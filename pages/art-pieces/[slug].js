@@ -9,9 +9,23 @@ export default function ArtPieceDetailsPage({ data }) {
 
   if (!data) return null;
 
+  // Find the art piece that matches the slug
+  const artPiece = data.find((data) => data.slug === slug);
+
+  // If no art piece is found, handle the case
+  if (!artPiece) {
+    return <div>Art piece not found</div>;
+  }
+
   return (
     <>
-      <ArtPieceDetails data={data} />
+      <ArtPieceDetails
+        image={artPiece.imageSource}
+        title={artPiece.name}
+        artist={artPiece.artist}
+        year={artPiece.year}
+        genre={artPiece.genre}
+      />
     </>
   );
 }
