@@ -70,7 +70,7 @@ USE IMMER APROACH
 const [artPiecesInfo, updateArtPiecesInfo] = useImmer([]);
 
 function handleToggleFavorite(slug) {
-  updateartPiecesInfo((draft) => {
+  updateArtPiecesInfo((draft) => {
     // find the art piece in the state
     const info = draft.find((info) => info.slug === slug);
 
