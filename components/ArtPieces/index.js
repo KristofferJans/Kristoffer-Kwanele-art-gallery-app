@@ -11,7 +11,7 @@ export default function ArtPieces({
   return (
     <ul>
       {pieces.map((piece) => {
-        // Prüfe für jedes Kunstwerk, ob es ein Favorit ist
+        // check every art piece if it is already a favorite
         const isFavorite = artPiecesInfo?.find(
           (info) => info.slug === piece.slug
         )?.isFavorite;
