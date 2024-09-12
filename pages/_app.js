@@ -32,11 +32,11 @@ export default function App({ Component, pageProps }) {
       // find the art piece in the state
       const info = draft.find((info) => info.slug === slug);
 
-      // if the movie is already in the state, toggle the isFavorite property
+      // if the art piece is already in the state, toggle the isFavorite property
       if (info) {
         info.isFavorite = !info.isFavorite;
       } else {
-        // if the movie is not in the state, add it with isFavorite set to true
+        // if the art piece is not in the state, add it with isFavorite set to true
         draft.push({ slug, isFavorite: true });
       }
     });
