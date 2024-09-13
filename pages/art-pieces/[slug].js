@@ -5,6 +5,7 @@ export default function ArtPieceDetailsPage({
   data,
   artPiecesInfo,
   handleToggleFavorite,
+  handleAddComment,
 }) {
   const router = useRouter();
   const { slug } = router.query;
@@ -25,6 +26,10 @@ export default function ArtPieceDetailsPage({
     (info) => info.slug === slug
   )?.isFavorite;
 
+  // Find the comments for this specific art piece - comment functionality
+  const artPieceInfo = artPiecesInfo.find((info) => info.slug === slug);
+  const comments = artPieceInfo?.comments || []; // Ensure comments is an array
+
   return (
     <>
       <ArtPieceDetails
@@ -35,6 +40,8 @@ export default function ArtPieceDetailsPage({
         genre={artPiece.genre}
         isFavorite={isFavorite}
         onToggleFavorite={() => handleToggleFavorite(artPiece.slug)}
+        comments={comments} // Pass comments array to display in ArtPieceDetails
+        onAddComment={(comment) => handleAddComment(artPiece.slug, comment)} // Handle comment submission
       />
     </>
   );
