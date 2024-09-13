@@ -3,6 +3,15 @@ import { useRouter } from "next/router";
 import FavoriteButton from "../FavoriteButton";
 import CommentForm from "../CommentForm";
 import Comments from "../Comments";
+import styled from "styled-components";
+
+const Circle = styled.div`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: ${(props) => props.color};
+  margin: 10px;
+`;
 
 export default function ArtPieceDetails({
   image,
@@ -15,10 +24,13 @@ export default function ArtPieceDetails({
   comments,
   onSubmitComment,
   slug,
+  colors,
 }) {
   const router = useRouter();
 
   const foundComments = comments?.filter((comment) => comment.slug === slug);
+
+  console.log("colors", colors);
 
   return (
     <>
@@ -39,6 +51,11 @@ export default function ArtPieceDetails({
       </button>
       <Comments comments={foundComments} />
       <CommentForm onSubmitComment={onSubmitComment} />
+      <div style={{ display: "flex", flexWrap: "wrap" }}>
+        {colors.map((color, index) => (
+          <Circle key={index} color={color} />
+        ))}
+      </div>
     </>
   );
 }
