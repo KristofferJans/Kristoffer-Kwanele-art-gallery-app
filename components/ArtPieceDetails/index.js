@@ -18,7 +18,7 @@ export default function ArtPieceDetails({
 }) {
   const router = useRouter();
 
-  const foundComments = comments.filter((comment) => comment.slug === slug);
+  const foundComments = comments?.filter((comment) => comment.slug === slug);
 
   return (
     <>
