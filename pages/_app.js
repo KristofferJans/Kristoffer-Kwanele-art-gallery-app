@@ -3,6 +3,7 @@ import GlobalStyle from "../styles";
 import useSWR from "swr";
 import { useState } from "react";
 import { useImmer } from "use-immer";
+import { useImmerLocalStorageState } from "@/lib/hook/useImmerLocalStorageState";
 
 const URL = "https://example-apis.vercel.app/api/art";
 
@@ -25,7 +26,10 @@ export default function App({ Component, pageProps }) {
   const { data, mutate, error, isLoading } = useSWR(URL, fetcher);
 
   // Initialize the state with useImmer
-  const [artPiecesInfo, updateArtPiecesInfo] = useImmer([]);
+  const [artPiecesInfo, updateArtPiecesInfo] = useImmerLocalStorageState(
+    "favorites",
+    { defaultValue: [] }
+  );
 
   function handleToggleFavorite(slug) {
     updateArtPiecesInfo((draft) => {
@@ -42,6 +46,24 @@ export default function App({ Component, pageProps }) {
     });
     console.log("Updated artPiecesInfo:", artPiecesInfo);
   }
+
+  const [comments, setComments] = useImmerLocalStorageState("comments", {
+    defaultValue: [],
+  });
+
+  const handleSubmitComment = (slug, commentText) => {
+    setComments((draft) => {
+      const newComment = {
+        text: commentText,
+        date: new Date().toLocaleString(),
+        slug,
+      };
+
+      draft.push(newComment);
+    });
+  };
+
+  console.log("comments", comments);
 
   // Log the props passed to the page component
   console.log("Props passed to page component:", {
@@ -62,6 +84,8 @@ export default function App({ Component, pageProps }) {
         data={data}
         artPiecesInfo={artPiecesInfo}
         handleToggleFavorite={handleToggleFavorite}
+        onSubmitComment={handleSubmitComment}
+        comments={comments}
       />
     </>
   );

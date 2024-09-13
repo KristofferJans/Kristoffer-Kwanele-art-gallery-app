@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import FavoriteButton from "../FavoriteButton";
+import CommentForm from "../CommentForm";
+import Comments from "../Comments";
 
 export default function ArtPieceDetails({
   image,
@@ -10,8 +12,13 @@ export default function ArtPieceDetails({
   genre,
   isFavorite,
   onToggleFavorite,
+  comments,
+  onSubmitComment,
+  slug,
 }) {
   const router = useRouter();
+
+  const foundComments = comments?.filter((comment) => comment.slug === slug);
 
   return (
     <>
@@ -30,6 +37,8 @@ export default function ArtPieceDetails({
       >
         Go back
       </button>
+      <Comments comments={foundComments} />
+      <CommentForm onSubmitComment={onSubmitComment} />
     </>
   );
 }

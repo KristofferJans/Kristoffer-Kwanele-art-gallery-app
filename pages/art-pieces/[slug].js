@@ -5,6 +5,8 @@ export default function ArtPieceDetailsPage({
   data,
   artPiecesInfo,
   handleToggleFavorite,
+  onSubmitComment,
+  comments,
 }) {
   const router = useRouter();
   const { slug } = router.query;
@@ -35,6 +37,9 @@ export default function ArtPieceDetailsPage({
         genre={artPiece.genre}
         isFavorite={isFavorite}
         onToggleFavorite={() => handleToggleFavorite(artPiece.slug)}
+        onSubmitComment={(comment) => onSubmitComment(slug, comment)}
+        comments={comments}
+        slug={slug}
       />
     </>
   );
