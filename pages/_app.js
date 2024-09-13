@@ -43,6 +43,20 @@ export default function App({ Component, pageProps }) {
     console.log("Updated artPiecesInfo:", artPiecesInfo);
   }
 
+  const [comments, setComments] = useImmer([]);
+
+  const handleSubmitComment = (slug, commentText) => {
+    setComments((draft) => {
+      const newComment = {
+        text: commentText,
+        date: new Date().toLocaleString(),
+        slug,
+      };
+
+      draft.push(newComment);
+    });
+  };
+
   // Log the props passed to the page component
   console.log("Props passed to page component:", {
     artPiecesInfo,
@@ -62,6 +76,8 @@ export default function App({ Component, pageProps }) {
         data={data}
         artPiecesInfo={artPiecesInfo}
         handleToggleFavorite={handleToggleFavorite}
+        onSubmitComment={handleSubmitComment}
+        comments={comments}
       />
     </>
   );
