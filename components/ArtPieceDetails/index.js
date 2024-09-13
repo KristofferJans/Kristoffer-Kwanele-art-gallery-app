@@ -30,8 +30,6 @@ export default function ArtPieceDetails({
 
   const foundComments = comments?.filter((comment) => comment.slug === slug);
 
-  console.log("colors", colors);
-
   return (
     <>
       <h2>Title: {title}</h2>

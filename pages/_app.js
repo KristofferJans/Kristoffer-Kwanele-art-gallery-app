@@ -44,7 +44,6 @@ export default function App({ Component, pageProps }) {
         draft.push({ slug, isFavorite: true });
       }
     });
-    console.log("Updated artPiecesInfo:", artPiecesInfo);
   }
 
   const [comments, setComments] = useImmerLocalStorageState("comments", {
@@ -62,14 +61,6 @@ export default function App({ Component, pageProps }) {
       draft.push(newComment);
     });
   };
-
-  console.log("comments", comments);
-
-  // Log the props passed to the page component
-  console.log("Props passed to page component:", {
-    artPiecesInfo,
-    handleToggleFavorite,
-  });
 
   if (!data) return <div>Loading data...</div>;
   if (error) return <div>failed to load</div>;

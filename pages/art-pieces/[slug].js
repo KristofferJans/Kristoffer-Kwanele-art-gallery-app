@@ -11,8 +11,6 @@ export default function ArtPieceDetailsPage({
   const router = useRouter();
   const { slug } = router.query;
 
-  console.log("slug", slug);
-
   if (!data) return null;
 
   // Find the art piece that matches the slug
