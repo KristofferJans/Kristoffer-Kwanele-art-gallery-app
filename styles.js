@@ -13,21 +13,10 @@ export default createGlobalStyle`
     
   }
 
-  .button_detailspage {
-  padding: 20px;
-  margin-left: -110px;
-  margin-top: 165px;
-  
-  background-color: red;
-  border: none;
-  border-radius: 10px;
-  position: absolute;
-
-  font-family: Open-Sans, ;
-
-  &:hover {
-  background-color: blue;
-}
-  
+  a {
+    text-decoration: none; 
+    
   }
+
+  
 `;
