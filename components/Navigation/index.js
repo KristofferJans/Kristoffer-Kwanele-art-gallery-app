@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Link from "next/link";
 
 const Nav = styled.nav`
-  background-color: #fff;
+  background-color: black;
   padding: 10px 400px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
@@ -19,8 +19,11 @@ const NavItem = styled.li`
 `;
 
 const NavLink = styled.a`
-  color: black;
+  color: white;
   text-decoration: none;
+  &:hover {
+    color: blue;
+  }
 `;
 
 export default function Navigation() {

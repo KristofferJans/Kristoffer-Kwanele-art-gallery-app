@@ -30,6 +30,9 @@ const Info = styled.p`
 
 const ImageContainer = styled.div`
   margin: 20px 0;
+  max-width: 320px;
+  margin: 0 auto;
+  padding: 20px;
 `;
 
 const ColorPalette = styled.div`
@@ -82,7 +85,13 @@ export default function ArtPieceDetails({
       <Info>Year: {year}</Info>
       <Info>Genre: {genre}</Info>
       <ImageContainer>
-        <Image src={image} alt={title} width={300} height={300} />
+        <Image
+          src={image}
+          alt={title}
+          width={300}
+          height={300}
+          layout="responsive"
+        />
       </ImageContainer>
       <FavoriteButton
         isFavorite={isFavorite}

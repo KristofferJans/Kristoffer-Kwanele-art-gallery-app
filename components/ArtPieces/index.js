@@ -5,7 +5,7 @@ import FavoriteButton from "../FavoriteButton";
 
 const Gallery = styled.ul`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
   padding: 20px;
 `;
@@ -30,6 +30,7 @@ const Title = styled.h2`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  text-align: center;
 `;
 
 const ImageContainer = styled.div`
@@ -47,36 +48,40 @@ export default function ArtPieces({
   handleToggleFavorite,
 }) {
   return (
-    <Gallery>
-      {pieces.map((piece) => {
-        const isFavorite = artPiecesInfo?.find(
-          (info) => info.slug === piece.slug
-        )?.isFavorite;
+    <>
+      <Gallery>
+        {pieces.map((piece) => {
+          const isFavorite = artPiecesInfo?.find(
+            (info) => info.slug === piece.slug
+          )?.isFavorite;
 
-        return (
-          <Piece key={piece.slug}>
-            <Link legacyBehavior href={`/art-pieces/${piece.slug}`}>
-              <a style={{ textDecoration: "none", color: "inherit" }}>
-                <ImageContainer>
-                  <Image
-                    src={piece.imageSource}
-                    alt={piece.name}
-                    width={200}
-                    height={200}
-                    style={{ objectFit: "cover" }} /* Verhindert Verzerrungen */
-                  />
-                </ImageContainer>
-                <Title>{piece.name}</Title>
-                <Artist>{piece.artist}</Artist>
-              </a>
-            </Link>
-            <FavoriteButton
-              isFavorite={isFavorite}
-              onToggleFavorite={() => handleToggleFavorite(piece.slug)}
-            />
-          </Piece>
-        );
-      })}
-    </Gallery>
+          return (
+            <Piece key={piece.slug}>
+              <Link legacyBehavior href={`/art-pieces/${piece.slug}`}>
+                <a style={{ textDecoration: "none", color: "inherit" }}>
+                  <ImageContainer>
+                    <Image
+                      src={piece.imageSource}
+                      alt={piece.name}
+                      width={200}
+                      height={200}
+                      style={{
+                        objectFit: "cover",
+                      }}
+                    />
+                  </ImageContainer>
+                  <Title>{piece.name}</Title>
+                  <Artist>{piece.artist}</Artist>
+                </a>
+              </Link>
+              <FavoriteButton
+                isFavorite={isFavorite}
+                onToggleFavorite={() => handleToggleFavorite(piece.slug)}
+              />
+            </Piece>
+          );
+        })}
+      </Gallery>
+    </>
   );
 }

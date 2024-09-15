@@ -3,7 +3,6 @@ import Image from "next/image";
 import FavoriteButton from "../FavoriteButton";
 import styled from "styled-components";
 
-// Styled Components direkt in der Spotlight-Datei definiert
 const DetailsContainer = styled.div`
   max-width: 800px;
   margin: 20px auto;
@@ -29,6 +28,9 @@ const Info = styled.p`
 
 const ImageContainer = styled.div`
   margin: 20px 0;
+  max-width: 320px;
+  margin: 0 auto;
+  padding: 20px;
 `;
 
 const ColorPalette = styled.div`
