@@ -19,6 +19,20 @@ export default createGlobalStyle`
     background-image: url(/white-gradient3.jpg)
   }
 
+    @media (max-width: ${breakpoints.mobile}) {
+    body {
+      font-size: 14px; 
+      padding: 0 10px; 
+    }
+  }
+
+  @media (max-width: ${breakpoints.tablet}) 
+
+  @media (min-width: ${breakpoints.laptop}) 
+
+  @media (min-width: ${breakpoints.desktop}) 
+
+
   a {
     text-decoration: none; 
   }
