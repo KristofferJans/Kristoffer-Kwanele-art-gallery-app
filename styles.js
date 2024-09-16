@@ -1,5 +1,11 @@
 import { createGlobalStyle } from "styled-components";
 
+const breakpoints = {
+  mobile: "768px",
+  tablet: "1024px",
+  desktop: "1280px",
+};
+
 export default createGlobalStyle`
   *,
   *::before,
@@ -10,24 +16,10 @@ export default createGlobalStyle`
   body {
     margin: 0;
     font-family: system-ui;
-    
+    background-image: url(/white-gradient3.jpg)
   }
 
-  .button_detailspage {
-  padding: 20px;
-  margin-left: -110px;
-  margin-top: 165px;
-  
-  background-color: red;
-  border: none;
-  border-radius: 10px;
-  position: absolute;
-
-  font-family: Open-Sans, ;
-
-  &:hover {
-  background-color: blue;
-}
-  
+  a {
+    text-decoration: none; 
   }
 `;
